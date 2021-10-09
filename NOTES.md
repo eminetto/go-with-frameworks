@@ -75,20 +75,20 @@ Create the interface in `usecase/student/interface.go`:
 package student
 
 import (
-	"github.com/eminetto/go-with-frameworks/ent/schema"
+	"github.com/eminetto/go-with-frameworks/ent"
 	"github.com/google/uuid"
 )
 //Reader interface
 type Reader interface {
-	Get(id uuid.UUID) (*schema.Student, error)
-	Search(name string) ([]*schema.Student, error)
-	List() ([]*schema.Student, error)
+	Get(id uuid.UUID) (*ent.Student, error)
+	Search(name string) ([]*ent.Student, error)
+	List() ([]*ent.Student, error)
 }
 
 //Writer user writer
 type Writer interface {
-	Create(e *schema.Student) error
-	Update(e *schema.Student) error
+	Create(e *ent.Student) error
+	Update(e *ent.Student) error
 	Delete(id uuid.UUID) error
 }
 
@@ -96,7 +96,10 @@ type Writer interface {
 type UseCase interface {
 	Reader
 	Writer
+	GetCourses(id uuid.UUID) ([]*ent.Course, error)
 }
+
 ```
 
+Create `usecase/student/service.go`
 
